@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Desklight</title>
+
+    <link rel="stylesheet" href="css/style.css" />
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap"
+        rel="stylesheet" />
+</head>
+
+<body>
+    <div class="app">
+        <!-- Sidebar navigation -->
+        <aside class="sidebar">
+            <div class="logo">
+                <div class="logo-icon">✦</div>
+                <span>Desklight</span>
+            </div>
+
+            <nav class="nav">
+                <p class="nav-label">General</p>
+
+                <a href="#" class="nav-item active" data-page="dashboardPage">
+                    <i data-lucide="layout-dashboard"></i>
+                    Dashboard
+                </a>
+
+                <a href="#" class="nav-item" data-page="schedulePage">
+                    <i data-lucide="calendar-days"></i>
+                    Schedule
+                </a>
+
+                <a href="#" class="nav-item" data-page="studyPage">
+                    <i data-lucide="book-open"></i>
+                    Study
+                </a>
+
+                <a href="#" class="nav-item" data-page="tasksPage">
+                    <i data-lucide="check-square"></i>
+                    Tasks
+                </a>
+
+                <p class="nav-label">Life</p>
+
+                <a href="#" class="nav-item" data-page="budgetPage">
+                    <i data-lucide="wallet"></i>
+                    Budget
+                </a>
+
+                <a href="#" class="nav-item" data-page="moodPage">
+                    <i data-lucide="heart"></i>
+                    Mood
+                </a>
+
+                <a href="#" class="nav-item" data-page="journalPage">
+                    <i data-lucide="notebook-pen"></i>
+                    Journal
+                </a>
+
+                <a href="#" class="nav-item" data-page="settingsPage">
+                    <i data-lucide="settings"></i>
+                    Settings
+                </a>
+            </nav>
+
+            <!-- Not real logout yet, just a placeholder for the future login version -->
+            <button class="logout" type="button">
+                <i data-lucide="sparkles"></i>
+                Local mode
+            </button>
+        </aside>
+
+        <!-- Main app content -->
+        <main class="main">
+            <header class="topbar">
+                <div class="search">
+                    <i data-lucide="search"></i>
+                    <input type="text" placeholder="Search anything..." />
+                </div>
+
+                <div class="top-actions">
+                    <button type="button" aria-label="Notifications">
+                        <i data-lucide="bell"></i>
+                    </button>
+
+                    <button type="button" aria-label="Profile">
+                        <i data-lucide="user"></i>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Dashboard page -->
+            <section class="page active-page" id="dashboardPage">
+                <section class="hero">
+                    <p class="eyebrow">Academic Survival OS</p>
+                    <h1>Good morning, Student</h1>
+                    <p>
+                        You have some tasks today, a few deadlines this week, and one
+                        suspiciously low amount of motivation.
+                    </p>
+                </section>
+
+                <section class="cards-grid">
+                    <div class="card yellow" id="dashboardStatusCard">
+                        <div class="card-header">
+                            <h3>Today’s Status</h3>
+                            <span class="pill">alive-ish</span>
+                        </div>
+
+                        <div class="big-stat">72%</div>
+                        <p>Academic survival chance</p>
+
+                        <div class="mini-bars">
+                            <span style="height: 40%"></span>
+                            <span style="height: 65%"></span>
+                            <span style="height: 35%"></span>
+                            <span style="height: 80%"></span>
+                            <span style="height: 50%"></span>
+                        </div>
+                    </div>
+
+                    <div class="card pink wide" id="dashboardStudyCard">
+                        <div class="card-header">
+                            <h3>Study Summary</h3>
+                            <span class="pill">this week</span>
+                        </div>
+
+                        <div class="study-line">
+                            <div>
+                                <strong>54%</strong>
+                                <span>average progress</span>
+                            </div>
+
+                            <div>
+                                <strong>3</strong>
+                                <span>modules</span>
+                            </div>
+
+                            <div>
+                                <strong>1</strong>
+                                <span>need help</span>
+                            </div>
+                        </div>
+
+                        <div class="fake-chart"></div>
+                    </div>
+
+                    <div class="card green" id="dashboardBudgetCard">
+                        <div class="card-header">
+                            <h3>Budget</h3>
+                            <span class="pill">this month</span>
+                        </div>
+
+                        <div class="big-stat">0 DH</div>
+                        <p>remaining this month</p>
+                    </div>
+
+                    <div class="card blue" id="dashboardMoodCard">
+                        <div class="card-header">
+                            <h3>Mood</h3>
+                            <span class="pill">today</span>
+                        </div>
+
+                        <div class="mood-row">
+                            <span>😴</span>
+                            <span>🥺</span>
+                            <span class="selected">🧍</span>
+                            <span>😭</span>
+                        </div>
+
+                        <p>Current mode: tired but functional</p>
+                    </div>
+                </section>
+
+                <section class="dashboard-preview-grid">
+                    <div class="panel" id="quickTasksPanel">
+                        <div class="panel-header">
+                            <h2>Quick Tasks</h2>
+                            <button class="small-btn" type="button" data-open-page="tasksPage">
+                                Open Tasks
+                            </button>
+                        </div>
+
+                        <div id="dashboardTaskPreview" class="preview-list"></div>
+                    </div>
+
+                    <div class="panel pink-panel" id="quickStudyPanel">
+                        <div class="panel-header">
+                            <h2>Quick Study</h2>
+                            <button class="small-btn dark" type="button" data-open-page="studyPage">
+                                Open Study
+                            </button>
+                        </div>
+
+                        <div id="dashboardStudyPreview" class="preview-list"></div>
+                    </div>
+                </section>
+            </section>
+
+            <!-- Schedule page -->
+            <section class="page" id="schedulePage">
+                <div class="page-title">
+                    <p class="eyebrow">Schedule</p>
+                    <h1>Schedule Planner</h1>
+                    <p>
+                        Add classes, study sessions, deadlines, personal plans, and tiny
+                        academic emergencies.
+                    </p>
+                </div>
+
+                <div class="schedule-layout">
+                    <div class="panel full-page-panel">
+                        <div class="panel-header">
+                            <h2>Add Event</h2>
+                            <span class="task-count" id="eventCount">0 events</span>
+                        </div>
+
+                        <form class="event-form" id="eventForm">
+                            <input type="text" id="eventTitle" placeholder="Event title" autocomplete="off" />
+
+                            <input type="date" id="eventDate" />
+                            <input type="time" id="eventTime" />
+
+                            <select id="eventCategory">
+                                <option value="study">Study</option>
+                                <option value="class">Class</option>
+                                <option value="exam">Exam</option>
+                                <option value="deadline">Deadline</option>
+                                <option value="personal">Personal</option>
+                            </select>
+
+                            <textarea id="eventNotes" placeholder="Small note"></textarea>
+
+                            <button type="submit">Add event</button>
+                        </form>
+                    </div>
+
+                    <div class="panel schedule-events-panel">
+                        <div class="panel-header">
+                            <h2>Upcoming Events</h2>
+                            <button class="small-btn" type="button" id="clearPastEvents">
+                                Clear past
+                            </button>
+                        </div>
+
+                        <div class="event-list" id="eventList"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Budget page -->
+            <section class="page" id="budgetPage">
+                <div class="page-title">
+                    <p class="eyebrow">Budget</p>
+                    <h1>Money Tracker</h1>
+                    <p>
+                        Track your monthly budget, expenses, spending habits, and the
+                        financial villain slowly draining your wallet.
+                    </p>
+                </div>
+
+                <section class="budget-summary-grid">
+                    <div class="card green budget-card">
+                        <div class="card-header">
+                            <h3>Remaining</h3>
+                            <span class="pill" id="budgetStatusPill">safe-ish</span>
+                        </div>
+
+                        <div class="big-stat" id="budgetRemaining">0 DH</div>
+                        <p id="budgetRemainingText">left this month</p>
+                    </div>
+
+                    <div class="card yellow budget-card">
+                        <div class="card-header">
+                            <h3>Spent</h3>
+                            <span class="pill">this month</span>
+                        </div>
+
+                        <div class="big-stat" id="budgetSpent">0 DH</div>
+                        <p id="budgetSpentText">0% of budget used</p>
+                    </div>
+
+                    <div class="card pink budget-card">
+                        <div class="card-header">
+                            <h3>Daily Allowance</h3>
+                            <span class="pill">survival math</span>
+                        </div>
+
+                        <div class="big-stat" id="dailyAllowance">0 DH</div>
+                        <p>you can spend per day</p>
+                    </div>
+
+                    <div class="card blue budget-card">
+                        <div class="card-header">
+                            <h3>Financial Villain</h3>
+                            <span class="pill">top category</span>
+                        </div>
+
+                        <div class="big-stat smaller-stat" id="topCategory">None</div>
+                        <p id="topCategoryText">no expenses yet</p>
+                    </div>
+                </section>
+
+                <section class="budget-layout">
+                    <div class="panel budget-settings-panel">
+                        <div class="panel-header">
+                            <h2>Monthly Setup</h2>
+                            <span class="task-count" id="budgetMonthLabel">This month</span>
+                        </div>
+
+                        <form class="budget-form" id="budgetForm">
+                            <label>
+                                Monthly budget
+                                <input type="number" id="monthlyBudget" min="0" placeholder="Example: 1000" />
+                            </label>
+
+                            <button type="submit">Save budget</button>
+                        </form>
+
+                        <div class="budget-progress-wrap">
+                            <div class="budget-progress-info">
+                                <span>Budget used</span>
+                                <strong id="budgetPercent">0%</strong>
+                            </div>
+
+                            <div class="budget-progress">
+                                <span id="budgetProgressBar"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel">
+                        <div class="panel-header">
+                            <h2>Add Expense</h2>
+                            <span class="task-count" id="expenseCount">0 expenses</span>
+                        </div>
+
+                        <form class="expense-form" id="expenseForm">
+                            <input type="text" id="expenseName" placeholder="Expense name, like: lunch"
+                                autocomplete="off" />
+
+                            <input type="number" id="expenseAmount" min="0" step="0.01" placeholder="Amount" />
+
+                            <select id="expenseCategory">
+                                <option value="food">Food</option>
+                                <option value="transport">Transport</option>
+                                <option value="school">School</option>
+                                <option value="fun">Fun</option>
+                                <option value="health">Health</option>
+                                <option value="other">Other</option>
+                            </select>
+
+                            <input type="date" id="expenseDate" />
+
+                            <button type="submit">Add expense</button>
+                        </form>
+                    </div>
+                </section>
+
+                <section class="budget-bottom-grid">
+                    <div class="panel">
+                        <div class="panel-header">
+                            <h2>Spending by Category</h2>
+                            <span class="task-count">breakdown</span>
+                        </div>
+
+                        <div class="category-list" id="categoryList"></div>
+                    </div>
+
+                    <div class="panel">
+                        <div class="panel-header">
+                            <h2>Recent Expenses</h2>
+                            <button class="small-btn" type="button" id="clearExpenses">
+                                Clear all
+                            </button>
+                        </div>
+
+                        <div class="expense-list" id="expenseList"></div>
+                    </div>
+                </section>
+            </section>
+
+            <!-- Mood page -->
+            <section class="page" id="moodPage">
+                <div class="page-title">
+                    <p class="eyebrow">Mood</p>
+                    <h1>Mood & Energy Tracker</h1>
+                    <p>
+                        Track how you feel, your energy, stress, sleep, and tiny emotional
+                        weather reports.
+                    </p>
+                </div>
+
+                <section class="mood-summary-grid">
+                    <div class="card blue mood-summary-card">
+                        <div class="card-header">
+                            <h3>Current Mood</h3>
+                            <span class="pill" id="currentMoodPill">today</span>
+                        </div>
+
+                        <div class="big-stat mood-big" id="currentMoodEmoji">🧍</div>
+                        <p id="currentMoodText">tired but functional</p>
+                    </div>
+
+                    <div class="card yellow mood-summary-card">
+                        <div class="card-header">
+                            <h3>Energy</h3>
+                            <span class="pill">average</span>
+                        </div>
+
+                        <div class="big-stat" id="averageEnergy">0%</div>
+                        <p>your battery level lately</p>
+                    </div>
+
+                    <div class="card pink mood-summary-card">
+                        <div class="card-header">
+                            <h3>Stress</h3>
+                            <span class="pill">average</span>
+                        </div>
+
+                        <div class="big-stat" id="averageStress">0%</div>
+                        <p>academic pressure detected</p>
+                    </div>
+
+                    <div class="card green mood-summary-card">
+                        <div class="card-header">
+                            <h3>Sleep</h3>
+                            <span class="pill">average</span>
+                        </div>
+
+                        <div class="big-stat" id="averageSleep">0h</div>
+                        <p>sleep per night</p>
+                    </div>
+                </section>
+
+                <section class="mood-layout">
+                    <div class="panel mood-entry-panel">
+                        <div class="panel-header">
+                            <h2>Today’s Check-in</h2>
+                            <span class="task-count" id="moodEntryCount">0 entries</span>
+                        </div>
+
+                        <form class="mood-form" id="moodForm">
+                            <div class="mood-picker">
+                                <label class="mood-option">
+                                    <input type="radio" name="mood" value="great" />
+                                    <span>😌</span>
+                                    <small>great</small>
+                                </label>
+
+                                <label class="mood-option">
+                                    <input type="radio" name="mood" value="okay" />
+                                    <span>🙂</span>
+                                    <small>okay</small>
+                                </label>
+
+                                <label class="mood-option">
+                                    <input type="radio" name="mood" value="tired" checked />
+                                    <span>🧍</span>
+                                    <small>tired</small>
+                                </label>
+
+                                <label class="mood-option">
+                                    <input type="radio" name="mood" value="stressed" />
+                                    <span>😵‍💫</span>
+                                    <small>stressed</small>
+                                </label>
+
+                                <label class="mood-option">
+                                    <input type="radio" name="mood" value="sad" />
+                                    <span>😭</span>
+                                    <small>sad</small>
+                                </label>
+                            </div>
+
+                            <label class="range-label">
+                                Energy
+                                <div class="range-row">
+                                    <input type="range" id="energyInput" min="0" max="100" value="50" />
+                                    <strong id="energyValue">50%</strong>
+                                </div>
+                            </label>
+
+                            <label class="range-label">
+                                Stress
+                                <div class="range-row">
+                                    <input type="range" id="stressInput" min="0" max="100" value="50" />
+                                    <strong id="stressValue">50%</strong>
+                                </div>
+                            </label>
+
+                            <label class="range-label">
+                                Sleep hours
+                                <input type="number" id="sleepInput" min="0" max="24" step="0.5"
+                                    placeholder="Example: 7" />
+                            </label>
+
+                            <textarea id="moodNote"
+                                placeholder="Small note, like: studied a bit, tired but survived"></textarea>
+
+                            <button type="submit">Save check-in</button>
+                        </form>
+                    </div>
+
+                    <div class="panel mood-history-panel">
+                        <div class="panel-header">
+                            <h2>Mood History</h2>
+                            <button class="small-btn" type="button" id="clearMoodEntries">
+                                Clear all
+                            </button>
+                        </div>
+
+                        <div class="mood-history-list" id="moodHistoryList"></div>
+                    </div>
+                </section>
+            </section>
+
+            <!-- Journal page -->
+            <section class="page" id="journalPage">
+                <div class="page-title">
+                    <p class="eyebrow">Journal</p>
+                    <h1>Brain Dump Journal</h1>
+                    <p>
+                        Write thoughts, plans, reflections, tiny victories, academic
+                        breakdowns, or suspiciously dramatic notes.
+                    </p>
+                </div>
+
+                <section class="journal-summary-grid">
+                    <div class="card yellow journal-summary-card">
+                        <div class="card-header">
+                            <h3>Entries</h3>
+                            <span class="pill">total</span>
+                        </div>
+
+                        <div class="big-stat" id="journalEntryTotal">0</div>
+                        <p>journal notes saved</p>
+                    </div>
+
+                    <div class="card pink journal-summary-card">
+                        <div class="card-header">
+                            <h3>Words</h3>
+                            <span class="pill">written</span>
+                        </div>
+
+                        <div class="big-stat" id="journalWordTotal">0</div>
+                        <p>words dumped from brain</p>
+                    </div>
+
+                    <div class="card blue journal-summary-card">
+                        <div class="card-header">
+                            <h3>Main Theme</h3>
+                            <span class="pill">category</span>
+                        </div>
+
+                        <div class="big-stat smaller-stat" id="journalTopCategory">
+                            None
+                        </div>
+
+                        <p id="journalTopCategoryText">no entries yet</p>
+                    </div>
+                </section>
+
+                <section class="journal-layout">
+                    <div class="panel journal-write-panel">
+                        <div class="panel-header">
+                            <h2>New Entry</h2>
+                            <span class="task-count">write</span>
+                        </div>
+
+                        <form class="journal-form" id="journalForm">
+                            <input type="text" id="journalTitle" placeholder="Title, like: Today was weird"
+                                autocomplete="off" />
+
+                            <div class="journal-form-row">
+                                <select id="journalMood">
+                                    <option value="calm">calm</option>
+                                    <option value="happy">happy</option>
+                                    <option value="tired">tired</option>
+                                    <option value="stressed">stressed</option>
+                                    <option value="sad">sad</option>
+                                    <option value="chaotic">chaotic</option>
+                                </select>
+
+                                <select id="journalCategory">
+                                    <option value="personal">Personal</option>
+                                    <option value="study">Study</option>
+                                    <option value="idea">Idea</option>
+                                    <option value="reflection">Reflection</option>
+                                    <option value="rant">Rant</option>
+                                    <option value="memory">Memory</option>
+                                </select>
+                            </div>
+
+                            <textarea id="journalText"
+                                placeholder="Write whatever is taking space in your head..."></textarea>
+
+                            <button type="submit">Save entry</button>
+                        </form>
+                    </div>
+
+                    <div class="panel journal-list-panel">
+                        <div class="panel-header">
+                            <h2>Saved Entries</h2>
+                            <button class="small-btn" type="button" id="clearJournalEntries">
+                                Clear all
+                            </button>
+                        </div>
+
+                        <div class="journal-tools">
+                            <input type="text" id="journalSearch" placeholder="Search entries..." autocomplete="off" />
+
+                            <select id="journalFilter">
+                                <option value="all">All categories</option>
+                                <option value="personal">Personal</option>
+                                <option value="study">Study</option>
+                                <option value="idea">Idea</option>
+                                <option value="reflection">Reflection</option>
+                                <option value="rant">Rant</option>
+                                <option value="memory">Memory</option>
+                            </select>
+                        </div>
+
+                        <div class="journal-list" id="journalList"></div>
+                    </div>
+                </section>
+            </section>
+
+            <!-- Tasks page -->
+            <section class="page" id="tasksPage">
+                <div class="page-title">
+                    <p class="eyebrow">Tasks</p>
+                    <h1>Today’s Tasks</h1>
+                    <p>
+                        Add deadlines, track urgency, and stop pretending the report will
+                        finish itself.
+                    </p>
+                </div>
+
+                <div class="panel full-page-panel">
+                    <div class="panel-header">
+                        <h2>Task Manager</h2>
+                        <span class="task-count" id="taskCount">0 tasks</span>
+                    </div>
+
+                    <form class="task-form" id="taskForm">
+                        <input type="text" id="taskInput" placeholder="Add a task" autocomplete="off" />
+
+                        <input type="text" id="taskModule" list="moduleSuggestions" placeholder="Category / module"
+                            autocomplete="off" />
+
+                        <datalist id="moduleSuggestions">
+                            <option value="General"></option>
+                            <option value="Study"></option>
+                            <option value="Homework"></option>
+                            <option value="Project"></option>
+                            <option value="Personal"></option>
+                        </datalist>
+
+                        <input type="date" id="taskDate" />
+
+                        <button type="submit">Add</button>
+                    </form>
+
+                    <div class="task-list" id="taskList"></div>
+                </div>
+            </section>
+
+            <!-- Study page -->
+            <section class="page" id="studyPage">
+                <div class="page-title">
+                    <p class="eyebrow">Study</p>
+                    <h1>Study Modules</h1>
+                    <p>
+                        Track your modules, exam dates, confidence, and how much boss HP
+                        remains.
+                    </p>
+                </div>
+
+                <div class="panel pink-panel full-page-panel">
+                    <div class="panel-header">
+                        <h2>Module Tracker</h2>
+                        <span class="task-count" id="moduleCount">0 modules</span>
+                    </div>
+
+                    <form class="module-form" id="moduleForm">
+                        <input class="module-name-input" type="text" id="moduleName" placeholder="Module name"
+                            autocomplete="off" />
+
+                        <select id="moduleConfidence">
+                            <option value="low">low confidence</option>
+                            <option value="medium">medium confidence</option>
+                            <option value="high">high confidence</option>
+                        </select>
+
+                        <input type="number" id="moduleProgress" min="0" max="100" placeholder="Progress %" />
+
+                        <input type="date" id="moduleExamDate" />
+
+                        <button type="submit" class="module-add-btn">Add module</button>
+                    </form>
+
+                    <div class="module-list" id="moduleList"></div>
+                </div>
+            </section>
+
+            <!-- Settings page -->
+            <section class="page" id="settingsPage">
+                <div class="page-title">
+                    <p class="eyebrow">Settings</p>
+                    <h1>Customize Your Dashboard</h1>
+                    <p>
+                        Make the dashboard feel like yours: change your name, title,
+                        currency, theme, visible cards, and manage your saved data.
+                    </p>
+                </div>
+
+                <section class="settings-layout">
+                    <!-- Personalization -->
+                    <div class="panel settings-panel">
+                        <div class="panel-header">
+                            <h2>Personalization</h2>
+                            <span class="task-count">profile</span>
+                        </div>
+
+                        <form class="settings-form" id="personalSettingsForm">
+                            <label>
+                                What should I call you?
+                                <input type="text" id="settingsUserName" placeholder="Example: Toast"
+                                    autocomplete="off" />
+                            </label>
+
+                            <label>
+                                Dashboard title
+                                <input type="text" id="settingsDashboardTitle"
+                                    placeholder="Example: Academic Survival OS" autocomplete="off" />
+                            </label>
+
+                            <label>
+                                Currency
+                                <select id="settingsCurrency">
+                                    <option value="DH">Moroccan Dirham — DH</option>
+                                    <option value="$">US Dollar — $</option>
+                                    <option value="€">Euro — €</option>
+                                    <option value="£">British Pound — £</option>
+                                </select>
+                            </label>
+
+                            <label>
+                                Dashboard tone
+                                <select id="settingsTone">
+                                    <option value="funny">Funny</option>
+                                    <option value="gentle">Gentle</option>
+                                    <option value="serious">Serious</option>
+                                    <option value="chaotic">Chaotic</option>
+                                </select>
+                            </label>
+
+                            <button type="submit">Save personalization</button>
+                        </form>
+                    </div>
+
+                    <!-- Theme -->
+                    <div class="panel settings-panel">
+                        <div class="panel-header">
+                            <h2>Theme</h2>
+                            <span class="task-count">appearance</span>
+                        </div>
+
+                        <div class="theme-options" id="themeOptions">
+                            <button class="theme-option active" type="button" data-theme="cream">
+                                <span class="theme-preview cream-theme"></span>
+                                Cozy Cream
+                            </button>
+
+                            <button class="theme-option" type="button" data-theme="pink">
+                                <span class="theme-preview pink-theme"></span>
+                                Pastel Pink
+                            </button>
+
+                            <button class="theme-option" type="button" data-theme="green">
+                                <span class="theme-preview green-theme"></span>
+                                Sage Green
+                            </button>
+
+                            <button class="theme-option" type="button" data-theme="blue">
+                                <span class="theme-preview blue-theme"></span>
+                                Soft Blue
+                            </button>
+
+                            <button class="theme-option" type="button" data-theme="dark">
+                                <span class="theme-preview dark-theme"></span>
+                                Dark Study
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Dashboard visibility -->
+                    <div class="panel settings-panel">
+                        <div class="panel-header">
+                            <h2>Dashboard Cards</h2>
+                            <span class="task-count">show / hide</span>
+                        </div>
+
+                        <div class="settings-checklist">
+                            <label>
+                                <input type="checkbox" id="showStatusCard" checked />
+                                Show Today’s Status card
+                            </label>
+
+                            <label>
+                                <input type="checkbox" id="showStudyCard" checked />
+                                Show Study Summary card
+                            </label>
+
+                            <label>
+                                <input type="checkbox" id="showBudgetCard" checked />
+                                Show Budget card
+                            </label>
+
+                            <label>
+                                <input type="checkbox" id="showMoodCard" checked />
+                                Show Mood card
+                            </label>
+
+                            <label>
+                                <input type="checkbox" id="showQuickTasks" checked />
+                                Show Quick Tasks preview
+                            </label>
+
+                            <label>
+                                <input type="checkbox" id="showQuickStudy" checked />
+                                Show Quick Study preview
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Data management -->
+                    <div class="panel settings-panel danger-settings">
+                        <div class="panel-header">
+                            <h2>Data Management</h2>
+                            <span class="task-count">local data</span>
+                        </div>
+
+                        <div class="data-actions">
+                            <button type="button" id="exportDataBtn">Export data</button>
+
+                            <label class="import-label">
+                                Import data
+                                <input type="file" id="importDataInput" accept=".json" />
+                            </label>
+
+                            <button type="button" id="clearTasksBtn">Clear tasks</button>
+                            <button type="button" id="clearScheduleBtn">
+                                Clear schedule
+                            </button>
+                            <button type="button" id="clearBudgetBtn">Clear budget</button>
+                            <button type="button" id="clearMoodBtn">Clear mood</button>
+                            <button type="button" id="clearJournalBtn">
+                                Clear journal
+                            </button>
+                            <button type="button" class="danger-btn" id="resetAllBtn">
+                                Reset everything
+                            </button>
+                        </div>
+
+                        <p class="settings-note">
+                            Your data is saved in this browser using localStorage. Export it
+                            before clearing everything if you want a backup.
+                        </p>
+                    </div>
+                </section>
+            </section>
+        </main>
+
+        <!-- Right panel: desktop-only calendar + today timeline -->
+        <aside class="right-panel">
+            <div class="calendar-card">
+                <div class="calendar-top">
+                    <button type="button" aria-label="Previous month">
+                        <i data-lucide="chevron-left"></i>
+                    </button>
+
+                    <h3 id="calendarMonthTitle">May 2026</h3>
+
+                    <button type="button" aria-label="Next month">
+                        <i data-lucide="chevron-right"></i>
+                    </button>
+                </div>
+
+                <div class="calendar-grid" id="miniCalendarGrid">
+                    <span>MO</span>
+                    <span>TU</span>
+                    <span>WE</span>
+                    <span>TH</span>
+                    <span>FR</span>
+                    <span>SA</span>
+                    <span>SU</span>
+                </div>
+
+                <button class="add-event" type="button" data-open-page="schedulePage">
+                    Add event
+                </button>
+            </div>
+
+            <div class="timeline">
+                <h3>Today’s Timeline</h3>
+                <div id="todayTimeline"></div>
+            </div>
+        </aside>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>
