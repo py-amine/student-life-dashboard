@@ -33,10 +33,6 @@ It helps students manage tasks, schedules, budgets, mood check-ins and journal e
 
 ![Tasks](assets/screenshots/tasks.png)
 
-### Study Modules
-
-![Study Modules](assets/screenshots/study.png)
-
 ### Budget Tracker
 
 ![Budget Tracker](assets/screenshots/budget.png)
