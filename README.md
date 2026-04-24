@@ -33,6 +33,12 @@ It helps students manage tasks, schedules, budgets, mood check-ins and journal e
 3. Customize the dashboard from Settings.
 4. Export your data from Settings if you want a backup.
 
+## Data Privacy
+
+Desklight stores data locally in your browser using LocalStorage.  
+Your tasks, notes, budget entries and moods are not sent to a server.
+So, your data stays on the same browser/device unless you export it and import it somewhere else.
+
 ## Future Improvements
 
 - Mobile navigation menu
