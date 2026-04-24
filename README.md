@@ -33,6 +33,10 @@ It helps students manage tasks, schedules, budgets, mood check-ins and journal e
 3. Customize the dashboard from Settings.
 4. Export your data from Settings if you want a backup.
 
+## Live Demo
+
+[Open Desklight] (https://py-amine.github.io/student-life-dashboard/)
+
 ## Data Privacy
 
 Desklight stores data locally in your browser using LocalStorage.  
