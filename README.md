@@ -25,6 +25,29 @@ It helps students manage tasks, schedules, budgets, mood check-ins and journal e
 
 ## Screenshots
 
+### Dashboard
+
+![Dashboard](assets/screenshots/dashboard.png)
+
+### Tasks
+
+![Tasks](assets/screenshots/tasks.png)
+
+### Study Modules
+
+![Study Modules](assets/screenshots/study.png)
+
+### Budget Tracker
+
+![Budget Tracker](assets/screenshots/budget.png)
+
+### Mood Tracker
+
+![Mood Tracker](assets/screenshots/mood.png)
+
+### Dark Mode
+
+![Dark Mode Dashboard](assets/screenshots/dark-mode-dashboard.png)
 
 ## How to Use
 
