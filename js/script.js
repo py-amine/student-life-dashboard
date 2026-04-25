@@ -772,6 +772,47 @@ if (moduleForm) {
 
 /* PAGE NAVIGATION */
 
+/* Mobile sidebar */
+
+const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+const sidebar = document.querySelector(".sidebar");
+const sidebarCloseBtn = document.getElementById("sidebarCloseBtn");
+const mobileOverlay = document.getElementById("mobileOverlay");
+
+function openMobileSidebar() {
+    if (!sidebar || !mobileOverlay) return;
+
+    sidebar.classList.add("open");
+    mobileOverlay.classList.add("show");
+    document.body.style.overflow = "hidden";
+}
+
+function closeMobileSidebar() {
+    if (!sidebar || !mobileOverlay) return;
+
+    sidebar.classList.remove("open");
+    mobileOverlay.classList.remove("show");
+    document.body.style.overflow = "";
+}
+
+if (mobileMenuBtn) {
+    mobileMenuBtn.addEventListener("click", openMobileSidebar);
+}
+
+if (sidebarCloseBtn) {
+    sidebarCloseBtn.addEventListener("click", closeMobileSidebar);
+}
+
+if (mobileOverlay) {
+    mobileOverlay.addEventListener("click", closeMobileSidebar);
+}
+
+window.addEventListener("resize", () => {
+    if (window.innerWidth > 850) {
+        closeMobileSidebar();
+    }
+});
+
 const navItems = document.querySelectorAll(".nav-item[data-page]");
 const pages = document.querySelectorAll(".page");
 const pageButtons = document.querySelectorAll("[data-open-page]");
@@ -799,6 +840,7 @@ navItems.forEach((item) => {
         if (!document.getElementById(pageId)) return;
 
         openPage(pageId);
+        closeMobileSidebar();
     });
 });
 
@@ -808,6 +850,7 @@ pageButtons.forEach((button) => {
         if (!document.getElementById(pageId)) return;
 
         openPage(pageId);
+        closeMobileSidebar();
     });
 });
 

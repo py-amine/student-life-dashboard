@@ -143,6 +143,18 @@ button {
     padding: 12px;
 }
 
+/* Mobile sidebar stuff is hidden on desktop */
+
+.mobile-menu-btn,
+.sidebar-close,
+.mobile-overlay {
+    display: none;
+}
+
+.sidebar-top {
+    display: block;
+}
+
 /* Main content  */
 
 .main {
@@ -1950,29 +1962,131 @@ body.theme-dark .search input {
 @media (max-width: 850px) {
     .app {
         grid-template-columns: 1fr;
+        width: 100vw;
+        min-height: 100vh;
+        margin: 0;
+        border-radius: 0;
+        border: none;
+        overflow: visible;
     }
 
+    .main {
+        padding: 18px;
+    }
+
+    /* Mobile sidebar opens as a drawer instead of disappearing */
+
     .sidebar {
-        display: none;
+        position: fixed;
+        inset: 0 auto 0 0;
+        width: min(290px, 82vw);
+        z-index: 50;
+        transform: translateX(-105%);
+        transition: transform 0.25s ease;
+        border-right: 2px solid rgba(255, 255, 255, 0.14);
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+    }
+
+    .sidebar-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        margin-bottom: 34px;
+    }
+
+    .logo {
+        margin-bottom: 0;
+    }
+
+    .sidebar-close {
+        display: grid;
+        place-items: center;
+        width: 38px;
+        height: 38px;
+        border: none;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.12);
+        color: white;
+    }
+
+    .sidebar-close svg {
+        width: 18px;
+    }
+
+    .mobile-overlay {
+        display: block;
+        position: fixed;
+        inset: 0;
+        z-index: 40;
+        background: rgba(0, 0, 0, 0.34);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.25s ease;
+    }
+
+    .mobile-overlay.show {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .mobile-menu-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 7px;
+        height: 44px;
+        border: none;
+        border-radius: 999px;
+        background: #111;
+        color: white;
+        padding: 0 16px;
+        font-weight: 800;
+    }
+
+    .mobile-menu-btn svg {
+        width: 18px;
     }
 
     .topbar {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 14px;
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 22px;
+    }
+
+    .search {
+        width: 100%;
+        min-width: 0;
+        padding: 11px 14px;
     }
 
     .top-actions {
         justify-content: flex-end;
     }
 
-    .search {
-        width: 100%;
+    .top-actions button {
+        width: 40px;
+        height: 40px;
+    }
+
+    .hero {
+        margin-bottom: 22px;
     }
 
     .hero h1,
     .page-title h1 {
-        font-size: 34px;
+        font-size: 32px;
+        letter-spacing: -1px;
+    }
+
+    .hero p,
+    .page-title p:last-child {
+        font-size: 14px;
     }
 
     .cards-grid,
@@ -1981,6 +2095,46 @@ body.theme-dark .search input {
     .mood-summary-grid,
     .journal-summary-grid {
         grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .card,
+    .panel,
+    .calendar-card,
+    .timeline {
+        border-radius: 24px;
+        padding: 18px;
+    }
+
+    .card {
+        min-height: auto;
+    }
+
+    .card h3 {
+        font-size: 17px;
+    }
+
+    .big-stat {
+        font-size: 34px;
+        margin-top: 20px;
+    }
+
+    .smaller-stat {
+        font-size: 24px;
+    }
+
+    .study-line {
+        gap: 18px;
+        flex-wrap: wrap;
+    }
+
+    .study-line strong {
+        font-size: 20px;
+    }
+
+    .mood-row {
+        flex-wrap: wrap;
+        margin: 22px 0 14px;
     }
 
     .task-form,
@@ -2008,15 +2162,103 @@ body.theme-dark .search input {
         grid-column: auto;
     }
 
+    .task-form,
+    .module-form,
+    .event-form,
+    .expense-form,
+    .mood-form,
+    .journal-form,
+    .settings-form,
+    .journal-tools,
+    .settings-checklist {
+        padding: 14px;
+        border-radius: 20px;
+    }
+
     .event-card,
     .expense-item,
     .mood-entry {
         grid-template-columns: 1fr;
     }
 
+    .task {
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .task-delete,
+    .event-delete,
+    .expense-delete,
+    .mood-delete,
+    .journal-delete,
+    .module-delete {
+        width: 32px;
+        height: 32px;
+    }
+
     .event-date-box,
     .mood-entry-emoji {
         width: fit-content;
         min-width: 62px;
+    }
+
+    .mood-picker {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .mood-option span {
+        height: 58px;
+    }
+
+    .page-title {
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 520px) {
+    .main {
+        padding: 14px;
+    }
+
+    .topbar {
+        grid-template-columns: 1fr;
+    }
+
+    .mobile-menu-btn {
+        width: fit-content;
+    }
+
+    .top-actions {
+        display: none;
+    }
+
+    .hero h1,
+    .page-title h1 {
+        font-size: 28px;
+    }
+
+    .card,
+    .panel {
+        padding: 16px;
+    }
+
+    .panel-header,
+    .card-header {
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .pill,
+    .task-count {
+        font-size: 11px;
+        padding: 6px 10px;
+    }
+
+    .mood-picker {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .data-actions {
+        gap: 10px;
     }
 }

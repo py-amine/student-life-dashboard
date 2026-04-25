@@ -17,6 +17,9 @@
 
 <body>
     <div class="app">
+        <!-- Mobile overlay, used when the sidebar opens -->
+        <div class="mobile-overlay" id="mobileOverlay"></div>
+
         <!-- Sidebar navigation -->
         <aside class="sidebar">
             <div class="logo">
@@ -80,10 +83,10 @@
         <!-- Main app content -->
         <main class="main">
             <header class="topbar">
-                <div class="search">
-                    <i data-lucide="search"></i>
-                    <input type="text" placeholder="Search anything..." />
-                </div>
+                <button class="mobile-menu-btn" type="button" id="mobileMenuBtn">
+                    <i data-lucide="menu"></i>
+                    Menu
+                </button>
 
                 <div class="top-actions">
                     <button type="button" aria-label="Notifications">
