@@ -1,7 +1,16 @@
 # Desklight
 
-Studly is a cozy student life dashboard built with HTML, CSS and JavaScript.  
-It helps students manage tasks, schedules, budgets, mood check-ins and journal entries in one aesthetic place.
+Desklight is a cozy student life dashboard built with HTML, CSS, and JavaScript.  
+It helps students manage tasks, schedules, budgets, mood check-ins, study modules, and journal entries in one aesthetic place.
+
+## Latest Update
+
+**v1.1 — Mobile-friendly update**
+
+- Added mobile navigation
+- Improved small-screen layout
+- Cleaned up responsive cards and forms
+- Fixed the sidebar behavior on mobile
 
 ## Features
 
@@ -15,6 +24,7 @@ It helps students manage tasks, schedules, budgets, mood check-ins and journal e
 - Show/hide dashboard cards
 - Export/import data
 - LocalStorage data saving
+- Mobile-friendly navigation
 
 ## Tech Stack
 
@@ -54,22 +64,24 @@ It helps students manage tasks, schedules, budgets, mood check-ins and journal e
 
 ## Live Demo
 
-[Open Desklight] (https://py-amine.github.io/student-life-dashboard/)
+[Open Desklight](https://py-amine.github.io/student-life-dashboard/)
 
 ## Data Privacy
 
 Desklight stores data locally in your browser using LocalStorage.  
-Your tasks, notes, budget entries and moods are not sent to a server.
-So, your data stays on the same browser/device unless you export it and import it somewhere else.
+Your tasks, notes, budget entries, mood check-ins, and settings are not sent to a server.
+
+Your data stays on the same browser/device unless you export it and import it somewhere else.
 
 ## Future Improvements
 
-- Mobile navigation menu
 - Search functionality
+- Task filters
+- Better settings and data controls
 - Optional login and cloud sync
 - More theme options
 - Better dashboard analytics
 
 ## Author
 
-Made by Mohamed Amine DHAINI
+Made by Mohamed Amine DHAINI.
