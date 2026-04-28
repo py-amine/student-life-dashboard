@@ -170,6 +170,23 @@ button {
     margin-bottom: 28px;
 }
 
+.mobile-page-label {
+    display: none;
+}
+
+.mobile-page-label span {
+    display: block;
+    font-weight: 900;
+    color: var(--text);
+}
+
+.mobile-page-label small {
+    display: block;
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 2px;
+}
+
 .search {
     width: min(520px, 100%);
     background: #fff9ec;
@@ -613,6 +630,28 @@ button {
     color: white;
     font-weight: 800;
     flex-shrink: 0;
+}
+
+.task-content {
+    min-width: 0;
+}
+
+.task-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.task-complete {
+    border: none;
+    height: 34px;
+    padding: 0 12px;
+    border-radius: var(--radius-sm);
+    background: rgba(255, 255, 255, 0.55);
+    color: #111;
+    font-size: 12px;
+    font-weight: 900;
 }
 
 /* Task urgency colors */
@@ -1979,11 +2018,13 @@ body.theme-dark .search input {
     .sidebar {
         position: fixed;
         inset: 0 auto 0 0;
-        width: min(290px, 82vw);
+        width: min(300px, 84vw);
+        height: 100dvh;
         z-index: 50;
         transform: translateX(-105%);
         transition: transform 0.25s ease;
         border-right: 2px solid rgba(255, 255, 255, 0.14);
+        overflow-y: auto;
     }
 
     .sidebar.open {
@@ -1996,6 +2037,14 @@ body.theme-dark .search input {
         justify-content: space-between;
         gap: 14px;
         margin-bottom: 34px;
+    }
+
+    .nav-item {
+        min-height: 46px;
+    }
+
+    .logout {
+        margin-top: 24px;
     }
 
     .logo {
@@ -2057,6 +2106,11 @@ body.theme-dark .search input {
         align-items: center;
         gap: 10px;
         margin-bottom: 22px;
+    }
+
+    .mobile-page-label {
+        display: block;
+        min-width: 0;
     }
 
     .search {
@@ -2175,6 +2229,31 @@ body.theme-dark .search input {
         border-radius: 20px;
     }
 
+    .schedule-layout,
+    .budget-layout,
+    .budget-bottom-grid,
+    .mood-layout,
+    .journal-layout,
+    .settings-layout {
+        gap: 14px;
+    }
+
+    .panel-header {
+        gap: 12px;
+    }
+
+    .panel-header h2 {
+        font-size: 20px;
+    }
+
+    .page-title {
+        margin-bottom: 18px;
+    }
+
+    .page-title h1 {
+        line-height: 1.05;
+    }
+
     .event-card,
     .expense-item,
     .mood-entry {
@@ -2184,6 +2263,15 @@ body.theme-dark .search input {
     .task {
         align-items: flex-start;
         gap: 12px;
+    }
+
+    .task-actions {
+        flex-direction: column;
+        align-items: flex-end;
+    }
+
+    .task-complete {
+        height: 32px;
     }
 
     .task-delete,
@@ -2213,6 +2301,24 @@ body.theme-dark .search input {
     .page-title {
         margin-bottom: 20px;
     }
+
+    .task-form input,
+    .task-form select,
+    .task-form button,
+    .module-form input,
+    .module-form select,
+    .module-form button,
+    .event-form input,
+    .event-form select,
+    .event-form button,
+    .expense-form input,
+    .expense-form select,
+    .expense-form button,
+    .settings-form input,
+    .settings-form select,
+    .settings-form button {
+        height: 48px;
+    }
 }
 
 @media (max-width: 520px) {
@@ -2222,6 +2328,10 @@ body.theme-dark .search input {
 
     .topbar {
         grid-template-columns: 1fr;
+    }
+
+    .mobile-page-label {
+        display: none;
     }
 
     .mobile-menu-btn {
@@ -2260,5 +2370,45 @@ body.theme-dark .search input {
 
     .data-actions {
         gap: 10px;
+    }
+
+    .task {
+        flex-direction: column;
+    }
+
+    .task-actions {
+        width: 100%;
+        flex-direction: row;
+        justify-content: flex-end;
+    }
+
+    .panel-header,
+    .card-header {
+        flex-wrap: wrap;
+    }
+
+    .card-header .pill,
+    .panel-header .task-count {
+        margin-top: 4px;
+    }
+
+    .cards-grid,
+    .budget-summary-grid,
+    .mood-summary-grid,
+    .journal-summary-grid {
+        gap: 12px;
+    }
+
+    .card {
+        min-height: 145px;
+    }
+
+    .big-stat {
+        font-size: 30px;
+        margin-top: 16px;
+    }
+
+    .card p {
+        font-size: 13px;
     }
 }

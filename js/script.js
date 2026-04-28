@@ -289,21 +289,33 @@ function renderTasks() {
             }`;
 
         taskElement.innerHTML = `
-      <div>
-        <h4>${escapeHTML(task.title)}</h4>
+  <div class="task-content">
+    <h4>${escapeHTML(task.title)}</h4>
 
-        <div class="task-meta">
-          <span class="task-tag">${escapeHTML(task.module)}</span>
-          <span class="task-tag">${urgency.dateText}</span>
-          <span class="task-tag">${urgency.label}</span>
-        </div>
-      </div>
+    <div class="task-meta">
+      <span class="task-tag">${escapeHTML(task.module)}</span>
+      <span class="task-tag">${urgency.dateText}</span>
+      <span class="task-tag">${urgency.label}</span>
+    </div>
+  </div>
 
-      <button class="task-delete" title="Delete task">×</button>
-    `;
+  <div class="task-actions">
+    <button class="task-complete" title="Mark task as done">
+      ${task.completed ? "Undo" : "Done"}
+    </button>
 
-        taskElement.addEventListener("click", () => {
+    <button class="task-delete" title="Delete task">×</button>
+  </div>
+`;
+
+        taskElement.querySelector(".task-complete").addEventListener("click", () => {
             task.completed = !task.completed;
+            saveTasks();
+            renderTasks();
+        });
+
+        taskElement.querySelector(".task-delete").addEventListener("click", () => {
+            tasks = tasks.filter((item) => item.id !== task.id);
             saveTasks();
             renderTasks();
         });
