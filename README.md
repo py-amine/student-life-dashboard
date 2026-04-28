@@ -11,6 +11,7 @@ It helps students manage tasks, schedules, budgets, mood check-ins, study module
 - Improved small-screen layout
 - Cleaned up responsive cards and forms
 - Fixed the sidebar behavior on mobile
+- Improved mobile task interactions
 
 ## Features
 
